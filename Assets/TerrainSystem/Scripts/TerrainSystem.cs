@@ -84,8 +84,8 @@ public class TerrainSystem : MonoBehaviour
 
   Dictionary<int, Style> styles = new Dictionary<int, Style>();
 
-  Texture2DArray tex_array;
-  Texture2DArray border_tex_array;
+  Texture2D tex_array;
+  Texture2D border_tex_array;
   bool tex_array_dirty = false;
 
   public const int tex_size = 512;
@@ -1432,17 +1432,26 @@ public class TerrainSystem : MonoBehaviour
       }
     }
 
-    // Create texture arrays
-    if (tex_array == null || num_array_textures != tex_array.depth || force)
+        // Create texture arrays
+        if (tex_array == null )
+
+            //if (tex_array == null || num_array_textures != tex_array.depth || force)
     {
-      tex_array = new Texture2DArray(size, size, Mathf.Max(1, num_array_textures), TextureFormat.RGBA32, UseMips);
+
+            //
+            //tex_array = new Texture2DArray(size, size, Mathf.Max(1, num_array_textures), TextureFormat.RGBA32, UseMips);
+      tex_array = new Texture2D(128, 128);
       tex_array.filterMode = FilterMode.Point;
       Shader.SetGlobalTexture("_tex_array", tex_array);
     }
 
-    if (border_tex_array == null || num_border_textures != border_tex_array.depth)
+
+        if (border_tex_array == null)
+
+            //if (border_tex_array == null || num_border_textures != border_tex_array.depth)
     {
-      border_tex_array = new Texture2DArray(border_tex_w, border_tex_h, Mathf.Max(1, num_border_textures), TextureFormat.RGBA32, UseMips);
+            //border_tex_array = new Texture2D(border_tex_w, border_tex_h, Mathf.Max(1, num_border_textures), TextureFormat.RGBA32, UseMips);
+      border_tex_array = new Texture2D(128, 128);
       border_tex_array.filterMode = FilterMode.Point;
       border_tex_array.wrapModeV = TextureWrapMode.Clamp;
       Shader.SetGlobalTexture("_border_tex_array", border_tex_array);
