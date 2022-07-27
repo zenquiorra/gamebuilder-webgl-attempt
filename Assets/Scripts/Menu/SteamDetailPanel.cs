@@ -21,6 +21,7 @@ using LapinerTools.Steam.Data;
 using LapinerTools.Steam;
 #endif
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class SteamDetailPanel : MonoBehaviour
 {
@@ -36,7 +37,7 @@ public class SteamDetailPanel : MonoBehaviour
 
 #if USE_STEAMWORKS
 
-  WWW thumbnailDownloading = null;
+  UnityWebRequest thumbnailDownloading = null;
   WorkshopItem workshopItem;
 
   public System.Action<Texture2D, string, string> SaveLocalCopy;
@@ -106,7 +107,7 @@ public class SteamDetailPanel : MonoBehaviour
 
   public void SetThumbnailUrl(string url)
   {
-    thumbnailDownloading = new WWW(url);
+    thumbnailDownloading = new UnityWebRequest(url);
   }
 
   public Sprite GetThumbnail()

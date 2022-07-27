@@ -17,6 +17,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 #if USE_STEAMWORKS
 using LapinerTools.Steam;
@@ -40,7 +41,7 @@ public class GameFeatured : MonoBehaviour
   DynamicPopup popups;
   LoadingScreen loadingScreen;
 
-  WWW thumbnailDownloading = null;
+  UnityWebRequest thumbnailDownloading = null;
 
   // If this is not null, this is the local file that is featured.
   // (full path).
@@ -125,7 +126,7 @@ public class GameFeatured : MonoBehaviour
 
   void SetThumbnailUrl(string url)
   {
-    thumbnailDownloading = new WWW(url);
+    thumbnailDownloading = new UnityWebRequest(url);
   }
 
   void Update()

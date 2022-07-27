@@ -17,6 +17,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class ThumbnailItem : MonoBehaviour
 {
@@ -27,7 +28,7 @@ public class ThumbnailItem : MonoBehaviour
   [SerializeField] UnityEngine.UI.Button thumbnailButton;
   [SerializeField] UnityEngine.UI.Image outline;
 
-  WWW thumbnailDownloading = null;
+  UnityWebRequest thumbnailDownloading = null;
 
   public System.Action OnClick;
   public System.Func<System.DateTime> GetWriteTime;
@@ -106,8 +107,8 @@ public class ThumbnailItem : MonoBehaviour
   {
     if (thumbnailDownloading != null)
     {
-      SetThumbnail(thumbnailDownloading.texture);
-      thumbnailDownloading = null;
+            SetThumbnail(DownloadHandlerTexture.GetContent(thumbnailDownloading));
+            thumbnailDownloading = null;
     }
   }
 
@@ -122,7 +123,7 @@ public class ThumbnailItem : MonoBehaviour
 
   public void SetThumbnailUrl(string url)
   {
-    thumbnailDownloading = new WWW(url);
+    thumbnailDownloading = new UnityWebRequest(url);
   }
 
   public void ToggleSelect(bool on)

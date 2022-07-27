@@ -22,14 +22,16 @@ using LapinerTools.Steam;
 #endif
 using UnityEngine;
 using System;
+using UnityEngine.Networking;
 
 public class WorkshopInfo : MonoBehaviour
 {
+    
   [SerializeField] WorkshopInfoUI infoUI;
 
 #if USE_STEAMWORKS
 
-  WWW thumbnailDownloading = null;
+  UnityWebRequest thumbnailDownloading = null;
   WorkshopItem workshopItem;
 
   public System.Action<Texture2D, string, string> SaveLocalCopy;
@@ -100,7 +102,7 @@ public class WorkshopInfo : MonoBehaviour
 
   public void SetThumbnailUrl(string url)
   {
-    thumbnailDownloading = new WWW(url);
+    thumbnailDownloading = new UnityWebRequest(url);
   }
 
   public Sprite GetThumbnail()

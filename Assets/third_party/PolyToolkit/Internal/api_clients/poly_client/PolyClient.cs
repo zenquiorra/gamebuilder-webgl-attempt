@@ -127,18 +127,18 @@ namespace PolyToolkitInternal.api_clients.poly_client {
       StringBuilder sb = new StringBuilder();
       sb.Append(BASE_URL)
         .Append("/v1/assets")
-        .AppendFormat("?key={0}", WWW.EscapeURL(PolyMainInternal.Instance.apiKey));
+        .AppendFormat("?key={0}", UnityWebRequest.EscapeURL(PolyMainInternal.Instance.apiKey));
       
       if (listAssetsRequest.formatFilter != null) {
-        sb.AppendFormat("&format={0}", WWW.EscapeURL(FORMAT_FILTER[listAssetsRequest.formatFilter.Value]));
+        sb.AppendFormat("&format={0}", UnityWebRequest.EscapeURL(FORMAT_FILTER[listAssetsRequest.formatFilter.Value]));
       }
 
       if (listAssetsRequest.keywords != null) {
-        sb.AppendFormat("&keywords={0}", WWW.EscapeURL(listAssetsRequest.keywords));
+        sb.AppendFormat("&keywords={0}", UnityWebRequest.EscapeURL(listAssetsRequest.keywords));
       }
       
       if (listAssetsRequest.category != PolyCategory.UNSPECIFIED) {
-        sb.AppendFormat("&category={0}", WWW.EscapeURL(CATEGORIES[listAssetsRequest.category]));
+        sb.AppendFormat("&category={0}", UnityWebRequest.EscapeURL(CATEGORIES[listAssetsRequest.category]));
       }
 
       if (listAssetsRequest.curated) {
@@ -146,13 +146,13 @@ namespace PolyToolkitInternal.api_clients.poly_client {
       }
 
       if (listAssetsRequest.maxComplexity != PolyMaxComplexityFilter.UNSPECIFIED) {
-        sb.AppendFormat("&max_complexity={0}", WWW.EscapeURL(MAX_COMPLEXITY[listAssetsRequest.maxComplexity]));
+        sb.AppendFormat("&max_complexity={0}", UnityWebRequest.EscapeURL(MAX_COMPLEXITY[listAssetsRequest.maxComplexity]));
       }
 
-      sb.AppendFormat("&order_by={0}", WWW.EscapeURL(ORDER_BY[listAssetsRequest.orderBy]));
+      sb.AppendFormat("&order_by={0}", UnityWebRequest.EscapeURL(ORDER_BY[listAssetsRequest.orderBy]));
       sb.AppendFormat("&page_size={0}", listAssetsRequest.pageSize.ToString());
       if (listAssetsRequest.pageToken != null) {
-        sb.AppendFormat("&page_token={0}", WWW.EscapeURL(listAssetsRequest.pageToken));
+        sb.AppendFormat("&page_token={0}", UnityWebRequest.EscapeURL(listAssetsRequest.pageToken));
       }
       return sb.ToString();
     }
@@ -167,16 +167,16 @@ namespace PolyToolkitInternal.api_clients.poly_client {
         .AppendFormat("?key={0}", PolyMainInternal.Instance.apiKey);
         
       if (listUserAssetsRequest.formatFilter != null) {
-        sb.AppendFormat("&format={0}", WWW.EscapeURL(FORMAT_FILTER[listUserAssetsRequest.formatFilter.Value]));
+        sb.AppendFormat("&format={0}", UnityWebRequest.EscapeURL(FORMAT_FILTER[listUserAssetsRequest.formatFilter.Value]));
       }
 
       if (listUserAssetsRequest.visibility != PolyVisibilityFilter.UNSPECIFIED) {
-        sb.AppendFormat("&visibility={0}", WWW.EscapeURL(VISIBILITY[listUserAssetsRequest.visibility]));
+        sb.AppendFormat("&visibility={0}", UnityWebRequest.EscapeURL(VISIBILITY[listUserAssetsRequest.visibility]));
       }
-      sb.AppendFormat("&order_by={0}", WWW.EscapeURL(ORDER_BY[listUserAssetsRequest.orderBy]));
+      sb.AppendFormat("&order_by={0}", UnityWebRequest.EscapeURL(ORDER_BY[listUserAssetsRequest.orderBy]));
       sb.AppendFormat("&page_size={0}", listUserAssetsRequest.pageSize);
       if (listUserAssetsRequest.pageToken != null) {
-        sb.AppendFormat("&page_token={0}", WWW.EscapeURL(listUserAssetsRequest.pageToken));
+        sb.AppendFormat("&page_token={0}", UnityWebRequest.EscapeURL(listUserAssetsRequest.pageToken));
       }
 
       return sb.ToString();
@@ -191,10 +191,10 @@ namespace PolyToolkitInternal.api_clients.poly_client {
         .Append("/v1/users/me/likedassets")
         .AppendFormat("?key={0}", PolyMainInternal.Instance.apiKey);
         
-      sb.AppendFormat("&order_by={0}", WWW.EscapeURL(ORDER_BY[listLikedAssetsRequest.orderBy]));
+      sb.AppendFormat("&order_by={0}", UnityWebRequest.EscapeURL(ORDER_BY[listLikedAssetsRequest.orderBy]));
       sb.AppendFormat("&page_size={0}", listLikedAssetsRequest.pageSize);
       if (listLikedAssetsRequest.pageToken != null) {
-        sb.AppendFormat("&page_token={0}", WWW.EscapeURL(listLikedAssetsRequest.pageToken));
+        sb.AppendFormat("&page_token={0}", UnityWebRequest.EscapeURL(listLikedAssetsRequest.pageToken));
       }
 
       return sb.ToString();

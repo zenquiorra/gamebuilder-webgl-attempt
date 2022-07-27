@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using CommandTerminal;
+using UnityEngine.Networking;
 
 public class IconLoader : MonoBehaviour
 {
@@ -102,7 +103,7 @@ public class IconLoader : MonoBehaviour
       onError?.Invoke(iconName);
       yield break;
     }
-    WWW www = new WWW("file://" + filePath);
+    UnityWebRequest www = new UnityWebRequest("file://" + filePath);
     while (!www.isDone)
     {
       if (!string.IsNullOrEmpty(www.error))
@@ -113,13 +114,13 @@ public class IconLoader : MonoBehaviour
       }
       yield return new WaitForSeconds(0.25f);
     }
-    if (www.texture == null)
+    if (DownloadHandlerTexture.GetContent(www) == null)
     {
       Debug.LogError("Error loading icon (texture is null): " + iconName);
       onError?.Invoke(iconName);
       yield break;
     }
-    onLoaded.Invoke(iconName, www.texture);
+    onLoaded.Invoke(iconName, DownloadHandlerTexture.GetContent(www));
   }
 
   [RegisterCommand(Help = "Debug icon picker")]

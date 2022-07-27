@@ -186,7 +186,7 @@ namespace PolyToolkitInternal.entitlement {
 
       UserInfo user = new UserInfo();
       for (int i = 0; i < 2; i++) {
-        string uri = m_UserInfoUri + "&key=" + WWW.EscapeURL(PolyMainInternal.Instance.apiKey);
+        string uri = m_UserInfoUri + "&key=" + UnityWebRequest.EscapeURL(PolyMainInternal.Instance.apiKey);
         using (UnityWebRequest www = UnityWebRequest.Get(uri)) {
           Authenticate(www);
           yield return UnityCompat.SendWebRequest(www);
