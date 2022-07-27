@@ -21,6 +21,7 @@ using System.IO;
 using UnityEngine;
 using PolyToolkit;
 using System;
+using UnityEngine.Networking;
 
 // Maybe generalize to a model library..for non-poly objects.
 public class AssetCache : MonoBehaviour
@@ -414,14 +415,14 @@ public class AssetCache : MonoBehaviour
 
     IEnumerator LoadAndCacheImage(ImageVoosAsset asset)
     {
-      WWW request = new WWW(asset.url);
+      UnityWebRequest request = new UnityWebRequest(asset.url);
       yield return request;
       Debug.Assert(request.isDone);
       GameObject renderable = Instantiate(cache.imageRenderablePrefab);
-      renderable.GetComponentInChildren<Renderer>().material.mainTexture = request.texture;
+      renderable.GetComponentInChildren<Renderer>().material.mainTexture = DownloadHandlerTexture.GetContent(request);
 
       string uri = asset.GetUri();
-      cache.CreateCacheEntry(uri, renderable, request.texture);
+      cache.CreateCacheEntry(uri, renderable, DownloadHandlerTexture.GetContent(request));
 
       cache.downloadedImageUrls.Add(asset.url);
     }
